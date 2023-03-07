@@ -20,7 +20,7 @@ from selenium.webdriver.support import expected_conditions as EC
 #
 import os
 folder_path = os.path.dirname(os.path.abspath(__file__))
-driver_path = folder_path + "/chromedriver"
+driver_path = folder_path + "/chromedriver110.exe"
 print(driver_path)
 
 class driver(webdriver.Chrome):
@@ -55,7 +55,7 @@ class driver(webdriver.Chrome):
 		self.options = driver.options
 		if headless == True:
 			self.options.add_argument("--headless")  
-		webdriver.Chrome.__init__(self, path, chrome_options=self.options)
+		webdriver.Chrome.__init__(self, path, options=self.options)
 	def open_new_tab(self, url):
 		self.execute_script("window.open('"+str(url)+"');")
 		return self.window_handles[-1] #Tab window_handle
@@ -70,7 +70,11 @@ def quit_all():
 			d.close()
 		d.quit()
 
-if __name__ == "__main__":
+def test():
 	d = driver(headless=False)
 	d.get("https://www.google.com")
+	time.sleep(3)
 	d.quit()
+
+if __name__ == "__main__":
+	test()
